@@ -1,6 +1,6 @@
 # Electronic-ships-logbook
 An electronic logbook designed for offline use mainly on desktops.
-
+Online preview of how this works here: https://hiyabuddy.000webhostapp.com/index.html
 Preview of features:
 
 1. Add record button:<br>
