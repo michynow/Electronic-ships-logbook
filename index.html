@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your ship's log book.</title>
+    <meta name="description" content="Electronic log book of your ship">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="print-area" id="print">
+        <header>
+            <h1><span id="ship-type-span"></span><span id="ship-name-span">Ship's name</span> logbook</h1>
+            <div class="date-destination-div">
+                <p>Date:<span id="date-span"></span></p>
+                <p>
+                    Voyage from: <span id="dest-span__from"></span><span id="dest-span__to"></span>
+                </p>
+            </div>
+        </header><br>
+        <div class="records-table-container" >
+            <table class="records-table" sortable>
+                <thead>
+                    <tr class=table__input-general>
+                        <th colspan="5">Voyage details</th>
+                        <th colspan="3">Weather conditions</th>
+                        <th class="table__input-general-description" rowspan="2">General description / comments</th>
+                        <th class="table__actions" rowspan="2">Edit / delete record</th>
+                    </tr>
+                    <tr class="table__input-details">
+                        <td>Time <br> UTC</td>
+                        <td>Latitude <br> [&deg;&nbsp;,&nbsp;']</td>
+                        <td>Longitude <br> [&deg;&nbsp;,&nbsp;']</td>
+                        <td>Heading <br> [&deg;]</td>
+                        <td>SOG <br>[kt]</td>
+                        <!-- weather conditions -->
+                        <td class="table__wind-force-container">Wind force
+                            <div class="table__wind-tooltip-container">
+                                &#9432;
+                                <table class="table__wind-tooltip-text">
+                                    <thead>
+                                        <tr>
+                                            <td>Beautfort No.</td>
+                                            <td>Description</td>
+                                            <td>Wind Speed</td>
+                                            <td>Wave Height</td>
+                                            <td>Sea State</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>0</td>
+                                            <td>Calm</td>
+                                            <td>
+                                                < 1kt</td> <td>0 m
+                                            </td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Light air</td>
+                                            <td>1-3 kts</td>
+                                            <td>0-0.3m</td>
+                                            <td>0-1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Light breeze</td>
+                                            <td>4-6 kts</td>
+                                            <td>0.3-0.6m</td>
+                                            <td>2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Gentle breeze</td>
+                                            <td>7-10kts</td>
+                                            <td>0.6-1.2m</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Moderate breeze</td>
+                                            <td>11-16kts</td>
+                                            <td>1-2m</td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>Fresh breeze</td>
+                                            <td>17-21kts</td>
+                                            <td>2-3m</td>
+                                            <td>4-5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>Strong breeze</td>
+                                            <td>22-27kts</td>
+                                            <td>3-4m</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td>Near Gale</td>
+                                            <td>28-33kts</td>
+                                            <td>4-5.5m</td>
+                                            <td>6</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>Gale</td>
+                                            <td>34-40kts</td>
+                                            <td>5.5-7.5m</td>
+                                            <td>7</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td>Strong gale</td>
+                                            <td>41-47kts</td>
+                                            <td>7-10m</td>
+                                            <td>7-8</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td>Storm</td>
+                                            <td>48-55kts</td>
+                                            <td>9-12.5m</td>
+                                            <td>8</td>
+                                        </tr>
+                                        <tr>
+                                            <td>11</td>
+                                            <td>Violent storm</td>
+                                            <td>56-63kts</td>
+                                            <td>11.5-16m</td>
+                                            <td>8-9</td>
+                                        </tr>
+                                        <tr>
+                                            <td>12</td>
+                                            <td>Hurricane force</td>
+                                            <td>63+ kts</td>
+                                            <td>14m+</td>
+                                            <td>9</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                        <td>Sea state</td>
+                        <td>Visibility</td>
+                    </tr>
+                </thead>
+                <tbody class="records-table__tbody">
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <div class="operation-buttons">
+            <button class="new-record__btn">
+                Add new record
+            </button>
+            <button class="voyage-details__button">
+                Enter date and destination
+            </button>
+            <button class="ship-details__button">
+                Set ship's details
+            </button>
+            <button class="clear-records__button">
+                Clear records
+            </button>
+            <button class="export-button">
+                Export to PDF
+            </button>
+        </div>
+        <div class="ship-details__popup">
+            <div id="ship-details__popup-closing-btn">X</div><br>
+            <h2>Enter your ship's name and type</h2>
+            <form>
+                <label for="ship-type">Select your ship's type</label>
+                <!-- Selection of ship type - to be modified upon submit -->
+                <select name="ship-type" id="ship-type">
+                    <option value="M/V">Motor Vessel</option>
+                    <option value="M/T">Motor Tanker</option>
+                    <option value="S/V">Sailing Vessel</option>
+                    <option value="S/Y">Sailing Yacht</option>
+                    <option value="OSV">Offshore Support Vessel</option>
+                    <option value="DSV">Dive Support Vessel</option>
+                    <option value="PSV">Platform Supply Vessel</option>
+                    <option value="SOV">Service Operation Vessel</option>
+                    <option value="Tug">Tugboat</option>
+                </select>
+                <label for="ship-name">Enter your ship's name:</label>
+                <input type="text" id="ship-name-input" placeholder="Enter your ship's name here" required><br>
+                <button type="button" id="ship-details-submit-btn">Submit</button>
+            </form>
+        </div>
+        <!-- Pop up with date setting and destination -->
+        <div class="voyage-details__popup">
+            <div id="voyage-details__popup-closing-btn">X</div><br>
+            <h2>Fill out inputs below to update voyage details</h2>
+            <form>
+                <label for="date">Enter date:</label>
+                <input type="date" id="date-input" name="date" value="" min="2018-01-01" max="2021-01-01">
+                <label for="destination">Enter your last port of call:</label>
+                <input type="text" id="ship-destination-input__from" placeholder="Enter your last port of call">
+                <label for="destination">Enter your current destination:</label>
+                <input type="text" id="ship-destination-input__to" placeholder="Enter your current destination"><br>
+                <button type="button" id="voyage-details__submit-btn">Submit</button>
+            </form>
+        </div>
+        <!--New record pop up-->
+        <div class="new-record__popup">
+            <div id="new-record__popup-closing-btn">X</div><br>
+            <h2>Fill out inputs below to make a new record</h2>
+            <form autocomplete="off">
+                <label for="UTC-time">UTC Time </label>
+                <input type="time" name="UTC-time" placeholder="1200" id="new-record__UTC-time">
+                <label for="latitude">Latitude [&deg;&nbsp;,&nbsp;'] </label>
+                <div class="latitude-container">
+                    <input type="text" name="latitude" placeholder="00&deg; 00'" id="new-record__latitude" min="0"
+                        pattern="[0-9]{1,2}\D[0-9]{1,2}">
+                    <select class="north-south">
+                        <option value="N">N</option>
+                        <option value="S">S</option>
+                    </select>
+                    <button type="button" value="&deg;" class="new-record__lat-deg-btn">&deg;</button>
+                    <button type="button" value="'" class="new-record__lat-min-btn">'</button>
+                </div>
+                <label for="longitude">Longitude [&deg;&nbsp;,&nbsp;'] </label>
+                <div class="longitude-container">
+                    <input type="text" name="longitude" placeholder="000&deg; 00'" id="new-record__longitude"
+                        title="Degrees and minutes">
+                    <select class="east-west">
+                        <option value="E">E</option>
+                        <option value="W">W</option>
+                    </select>
+                    <button type="button" value="&deg;" class="new-record__long-deg-btn">&deg;</button>
+                    <button type="button" value="'" class="new-record__long-min-btn">'</button>
+                </div>
+                <label for="heading">Heading [&deg;] </label>
+                <input type="text" name="heading" placeholder="000&deg;" id="new-record__heading" maxlength="3">
+                <label for="SOG">SOG [kt] </label>
+                <input type="number" name="SOG" placeholder="Enter your speed" min="-5" max="40" id="new-record__SOG"
+                    min="-5" max="50" step=".1">
+                <label for="wind-force">Wind Force [B] </label>
+                <input type="number" name="wind-force" placeholder="Enter wind force" min="0" max="12"
+                    id="new-record__wind-force" min="0" max="12">
+                <label for="sea-state">Sea State </label>
+                <input type="number" name="sea-state" placeholder="Enter sea state" min="0" max="9"
+                    id="new-record__sea-state" min="0" max="9">
+                <label for="visibility">Visibility</label>
+                <input type="text" name="visibility" placeholder="Enter visibility" id="new-record__visibility" min="0"
+                    max="9">
+                <label for="remarks">General remarks </label>
+                <textarea name="remarks" name="remarks" id="new-record__remarks" placeholder="Add remarks..."
+                    maxlength="200"></textarea>
+            </form>
+            <button type="submit" id="new-record__submit-btn">Submit record</button>
+            <button type="submit" id="edit-record">Edit record</button>
+        </div>
+        <!-- confirm deletion pop up -->
+        <div class="confirm-row-deletion-popup">
+            <h2>Are you sure you want to delete this row?</h2>
+            <div class="confirm-row-deletion__button-container">
+                <button type="button" id="confirm-row-deletion__btn--confirm">Confirm</button>
+                <button type="button" id="confirm-row-deletion__btn--cancel">Cancel</button>
+            </div>
+        </div>
+        <div class="confirm-table-clearing-popup">
+            <h2>Are you sure you want to clear all your records?</h2>
+            <div class="confirm-table-clearing__button-container">
+                <button type="button" id="confirm-table-clearing__btn--confirm">Confirm</button>
+                <button type="button" id="confirm-table-clearing__btn--cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="scripts/main.js"></script>
+    <script src="/scripts/node_modules/print-js/dist/print.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,381 @@
+//stylisation mixins
+@mixin displayFlex($display-direction) {
+    display: flex;
+    flex-direction: $display-direction;
+}
+
+@mixin buttonStyling($button-color, $button-hover) {
+    border: none;
+    background-color: $button-color;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px black;
+    padding: 10px;
+    transition: background 0.3s;
+
+    &:hover {
+        background-color: $button-hover;
+        cursor: pointer;
+    }
+}
+
+@mixin popupStyling() {
+    display: block;
+    visibility: hidden;
+    z-index: 9;
+    position: absolute;
+    top: 25%;
+    left: 20%;
+    width: 60vw;
+    background-color: lightgrey;
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid black;
+    @include displayFlex(column);
+
+    form {
+        @include popupFormStyling();
+
+        input {
+            text-align: center;
+        }
+    }
+}
+
+@mixin popupFormStyling() {
+    @include displayFlex(column);
+    width: 40%;
+    min-height: 25vh;
+    margin: 0 auto;
+    line-height: 1.5rem;
+}
+
+@mixin popupClosingBtn() {
+    height: 20px;
+    width: 20px;
+    background-color: darkred;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    border: 2px solid black;
+}
+
+body {
+    z-index: 0;
+    padding-top: 2vh;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    background: linear-gradient(to bottom, white 50%, #347deb);
+    position: relative;
+}
+
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+}
+
+header {
+    text-align: center;
+    // text-shadow:1px 1px black;
+    color: black;
+
+    p,
+    .destination {
+        text-align: left;
+        padding-left: 5vw;
+        font-weight: bold;
+    }
+}
+
+.records-table-container {
+    @include displayFlex(column);
+    width: 90vw;
+    height: 65vh;
+    margin: auto;
+    overflow-x: auto;
+    background-color: #faf6c3;
+    box-shadow: 0px -1px 22px -3px rgba(0, 0, 0, 0.75);
+
+    //dynamically created class of buttons
+    .new-record__delete-row-btn,
+    .new-record__edit-row-btn {
+        padding: 0.3rem;
+        width: 60px;
+        margin: 0.1rem;
+        color: white;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        background-color: rgba(150, 60, 44, 1);
+        transition: 0.3s all;
+
+        &:hover {
+            background-color: #803325;
+        }
+
+        &::after {
+            content: "Delete"
+        }
+    }
+
+    .new-record__edit-row-btn {
+        background-color: #5a51d6;
+
+        &::after {
+            content: "Edit"
+        }
+
+        &:hover {
+            background-color: #4f47bf
+        }
+    }
+
+    table,
+    th,
+    td,
+    tr {
+        border: 1px solid black;
+        padding: 5px 2px;
+        border-collapse: collapse;
+        text-align: center;
+    }
+
+    .table__input-general-description {
+        width: 40vw;
+    }
+
+    .table__input-details {
+        .table__wind-force-container {
+            position: relative;
+
+            .table__wind-tooltip-container {
+                display: inline-block;
+                visibility:hidden;
+                border-bottom: 1px solid black;
+                cursor: pointer;
+
+                .table__wind-tooltip-text {
+                    visibility: hidden;
+                    transition: 0.3s all;
+                    width: 100%;
+                    white-space: nowrap;
+                    background-color: black;
+                    color: #fff;
+                    text-align: center;
+                    border-radius: 6px;
+                    padding: 5px 0;
+                    position: absolute;
+                    left:-100%;
+                    z-index: 1;
+                    opacity: 0;
+                    thead,
+                    tr,
+                    td {
+                        border: 1px solid white;
+                    }
+                }
+            }
+
+            &:hover .table__wind-tooltip-text {
+                visibility: visible;
+                text-align: center;
+                transition: 0.3s all;
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.operation-buttons {
+    text-align: center;
+    padding: 5vh;
+    @include displayFlex(row);
+    justify-content: space-around;
+
+    .new-record__btn {
+        @include buttonStyling(rgba(79, 168, 103, 1), #3f8a53);
+    }
+
+    .export-button {
+        @include buttonStyling(rgba(150, 60, 44, 1), #803325)
+    }
+
+    .ship-details__button {
+        @include buttonStyling(#5a51d6, #4f47bf);
+    }
+
+    .voyage-details__button {
+        @include buttonStyling(#88b33e, #739636)
+    }
+
+    .clear-records__button {
+        @include buttonStyling(#deaa1b, #ba9222)
+    }
+}
+
+//popups stylisation
+.ship-details__popup {
+    #ship-details__popup-closing-btn {
+        @include popupClosingBtn();
+    }
+
+    @include popupStyling();
+
+    select {
+        text-align-last: center;
+        padding: 0.1rem;
+    }
+
+    #ship-details-submit-btn {
+        @include buttonStyling(#31508f, darkred)
+    }
+}
+
+.voyage-details__popup {
+    @include popupStyling();
+
+    #date-input {
+        padding-left: 15%;
+        cursor: pointer;
+    }
+
+    #voyage-details__popup-closing-btn {
+        @include popupClosingBtn();
+    }
+
+    #voyage-details__submit-btn {
+        @include buttonStyling(#31508f, darkred)
+    }
+}
+
+.new-record__popup {
+    @include popupStyling();
+    top: 15%;
+    margin: auto;
+
+    #new-record__popup-closing-btn {
+        @include popupClosingBtn();
+    }
+
+    #new-record__submit-btn {
+        @include buttonStyling(#31508f, darkred);
+        width: 40%;
+        margin: auto;
+    }
+
+    #edit-record {
+        @include buttonStyling(#31508f, darkred);
+        width: 40%;
+        margin: auto;
+        display: none;
+    }
+
+    form {
+        width: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 0.8rem;
+        justify-content: space-between;
+        line-height: 1.5rem;
+        padding-bottom: 2rem;
+
+        #new-record__remarks {
+            resize: none;
+            height: 3rem;
+            padding: 0.2rem;
+        }
+    }
+}
+
+.confirm-row-deletion-popup {
+    @include popupStyling();
+    @include displayFlex(column);
+    justify-content: space-evenly;
+    min-height: 200px;
+
+    .confirm-row-deletion__button-container {
+        @include displayFlex(row);
+        justify-content: space-around;
+
+        button {
+            @include buttonStyling(#31508f, darkred);
+            width: 100px;
+        }
+    }
+}
+
+.confirm-table-clearing-popup {
+    @include popupStyling();
+    @include displayFlex(column);
+    justify-content: space-evenly;
+    min-height: 200px;
+
+    .confirm-table-clearing__button-container {
+        @include displayFlex(row);
+        justify-content: space-around;
+
+        button {
+            @include buttonStyling(#31508f, darkred);
+            width: 100px;
+        }
+    }
+}
+@media(max-width:800px){
+    body{
+        font-size:12px;
+    }
+    .table__input-details{
+        .table__wind-force-container{
+            .table__wind-tooltip-container{
+                .table__wind-tooltip-text{
+                    font-size:10px;
+                    transform:translateX(-100px)
+                }
+            }
+        }
+    }
+}
+@media(max-width:500px){
+    .table__input-details{
+        .table__wind-force-container{
+            .table__wind-tooltip-container{
+                .table__wind-tooltip-text{
+                    font-size:8px;
+                }
+            }
+        }
+    }
+    .new-record__popup {
+        @include popupStyling();
+        top: 5%;
+        left:5%;
+        width:90vw;
+    
+        form {
+            width: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 0.8rem;
+            justify-content: space-between;
+            line-height: 1.5rem;
+            padding-bottom: 2rem;
+        }
+    }
+
+.voyage-details__popup{
+    width:90vw;
+    left:2%;
+}
+.ship-details__popup{
+    width:90vw;
+    left:2%;
+}
+}
