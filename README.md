@@ -1,10 +1,10 @@
 # Electronic-ships-logbook
 An electronic logbook designed for offline use mainly on desktops.
-Online preview of how this works here: https://hiyabuddy.000webhostapp.com/index.html
+Online preview of how this works here: https://hiyabuddy.000webhostapp.com/index.html<br>
 Preview of features:
 
 1. Add record button:<br>
-Shows a modal with several inputs to fill up. Upon submition adds a row to the table with 2 buttons at the end of each row - Edit and Delete. These are used to manipulate corresponding records. The application has applied a sorting by 'Time UTC' row in ascending order, so if you make a mistake, it will automatically be placed in the correct order upon deletion or addition or edition of a row.
+Shows a modal with several inputs to fill up. Upon submit adds a row to the table with 2 buttons at the end of each row - Edit and Delete. These are used to manipulate corresponding records. The application has applied a sorting by 'Time UTC' row in ascending order, so if you make a mistake, it will automatically be placed in the correct order upon deletion or addition or edition of a row.
 
 2. Enter date and destination button:<br>
 Shows a modal which is in charge of setting the date of the page, your last port of call and the destination you're heading to.
